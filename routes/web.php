@@ -38,7 +38,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 
 Route::post('/dashboard/posts/category', [DashboardPostController::class, 'simpanKategori'])->middleware('auth');
-// Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy']);
 
 Route::get('/dashboard/admin/posts/verifikasi/{post}', [DashboardAdminPostController::class, 'verifikasi'])->middleware(['auth', 'admin']);
