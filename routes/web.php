@@ -38,14 +38,15 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 
 Route::post('/dashboard/posts/category', [DashboardPostController::class, 'simpanKategori'])->middleware('auth');
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy']);
 
 Route::get('/dashboard/admin/posts/verifikasi/{post}', [DashboardAdminPostController::class, 'verifikasi'])->middleware(['auth', 'admin']);
 Route::put('/dashboard/admin/posts/verifikasi/{post}', [DashboardAdminPostController::class, 'verified'])->middleware(['auth', 'admin']);
 Route::put('/dashboard/admin/posts/verifikasi/not-verified/{post}', [DashboardAdminPostController::class, 'notVerified'])->middleware(['auth', 'admin']);
-Route::resource('/dashboard/admin/posts', DashboardAdminPostController::class)->middleware(['auth', 'admin'])->except('create');
 
 Route::resource('/dashboard/admin/categories', DashboardCategoryController::class)->middleware(['auth', 'admin']);
 
 Route::resource('/dashboard/admin/users', DashboardUserController::class)->middleware(['auth', 'admin']);
+
+Route::resource('/dashboard/admin/posts', DashboardAdminPostController::class)->middleware(['auth', 'admin'])->except('create')->names('admin.posts');
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
